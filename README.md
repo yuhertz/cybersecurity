@@ -22,6 +22,7 @@ cd cybersecurity
 pip3 install -r requirements.txt
 ```
 
+# NOTE THAT YOU DO NOT NEED TO PUT "HTTPS://"
 
 To view source code
 ```
