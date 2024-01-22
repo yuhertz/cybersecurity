@@ -34,7 +34,7 @@ python3 status.py
 
 To check for vulnerability in the website
 ```
-python3 test.py
+python3 scan.py
 ```
 
 
