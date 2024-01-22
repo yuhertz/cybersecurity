@@ -17,6 +17,12 @@ def get_website_status(url):
         print(f"Error: {e}")
 
 # Take the website domain as input
-website_domain = input("Enter Website Domain Name: ")
-url = f"http://{website_domain}"  # Assuming http:// for simplicity, adjust as needed
+website_input = input("Enter Website Domain Name: ")
+
+# Check if the input contains 'https://', if not, add it
+if not website_input.startswith("http://") and not website_input.startswith("https://"):
+    url = f"https://{website_input}"
+else:
+    url = website_input
+
 get_website_status(url)
