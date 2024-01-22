@@ -26,5 +26,5 @@ python3 html.py
 
 To view status code of website
 ```
-asdfgh
+python3 status.py
 ```
