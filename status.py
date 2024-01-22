@@ -17,6 +17,6 @@ def get_website_status(url):
         print(f"Error: {e}")
 
 # Take the website domain as input
-website_domain = input("Enter website domain: ")
+website_domain = input("Enter Website Domain Name: ")
 url = f"http://{website_domain}"  # Assuming http:// for simplicity, adjust as needed
 get_website_status(url)
