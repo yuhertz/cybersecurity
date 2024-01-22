@@ -2,8 +2,9 @@ import requests
 import time
 
 def scan_website():
-    domain = input("Enter Website Domain Name: ")
-    url = "https://" + domain
+    url = input("Enter Website URL or Domain Name: ")
+    if not url.startswith("https://"):
+        url = "https://" + url
     print("Scanning...")
 
     # Loading animation
