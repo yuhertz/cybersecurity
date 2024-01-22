@@ -8,6 +8,7 @@ pkg install git
 pkg install python-pip
 pkg install python3
 cd cybersecurity
+pip install -r requirements.txt
 ```
 
 Set Up for Kali Linux
@@ -16,12 +17,12 @@ sudo apt install git
 sudo apt install pip
 sudo apt install python3
 cd cybersecurity
+pip3 install -r requirements.txt
 ```
 
 
 To view source code
 ```
-pip install requests
 python3 html.py
 ```
 
@@ -32,7 +33,6 @@ python3 status.py
 
 To check for vulnerability in the website
 ```
-pip install selenium
 python3 test.py
 ```
 
