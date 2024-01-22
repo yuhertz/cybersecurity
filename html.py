@@ -24,7 +24,7 @@ def view_website_source(url):
             response.close()
 
 # Prompt the user to enter the domain name
-website_url = input("Enter Website Domain Name: ")
+website_url = input("Enter Website URL or Domain Name: ")
 
 # Ensure the URL starts with 'http://' or 'https://'
 if not website_url.startswith('http://') and not website_url.startswith('https://'):
