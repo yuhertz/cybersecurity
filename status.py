@@ -13,7 +13,7 @@ def get_website_status(url):
         for _ in range(40):  # Adjust the range for the desired number of iterations
             response = requests.get(url)
             display_status(response)
-            time.sleep(1)
+            time.sleep(0.2)
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
 
