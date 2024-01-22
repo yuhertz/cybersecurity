@@ -1,37 +1,36 @@
-from selenium import webdriver
+import requests
+import time
 
-def test_website(url):
-    # Create a new instance of the Firefox driver (you can use other browsers as well)
-    driver = webdriver.Firefox()
+def scan_website():
+    url = input("Enter Website Domain Name: ")
+    print("Scanning...")
 
-    try:
-        # Open the website
-        driver.get(url)
+    # Loading animation
+    animation = "|/-\\"
+    idx = 0
 
-        # Example: Check if the title of the webpage is as expected
-        expected_title = "Your Expected Title"
-        actual_title = driver.title
+    while True:
+        print("Scanning... " + animation[idx % len(animation)], end="\r")
+        idx += 1
+        time.sleep(0.1)
 
-        assert expected_title in actual_title, f"Title mismatch! Expected: {expected_title}, Actual: {actual_title}"
+        response = requests.get(url)
 
-        # Example: Check if a specific element is present on the webpage
-        # Replace 'your_element_locator' with the actual locator of the element you want to check
-        # You can inspect elements in your browser to find their locators
-        assert driver.find_element_by_css_selector('your_element_locator').is_displayed(), "Element not found!"
+        if response.status_code == 200:
+            # Analyze the response content for potential bugs
+            # You can use regular expressions or specific patterns to identify vulnerabilities
 
-        # You can add more tests based on your requirements
+            # Example: Look for SQL injection vulnerabilities
+            if 'error' in response.text:
+                print("Potential SQL injection vulnerability found!")
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
-    finally:
-        # Close the browser window
-        driver.quit()
+            # Example: Check for cross-site scripting (XSS) vulnerabilities
+            if '<script>' in response.text:
+                print("Potential XSS vulnerability found!")
 
-# Take user input for the website domain name
-website_domain = input("Enter Website Domain Name: ")
+            break
 
-# Construct the complete URL
-url = f"https://{website_domain}"
+    print("Scan complete!")
 
-# Call the test_website function with the provided URL
-test_website(url)
+# Usage example:
+scan_website()
