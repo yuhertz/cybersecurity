@@ -28,3 +28,9 @@ To view status code of website
 ```
 python3 status.py
 ```
+
+To check for vulnerability in the website
+```
+pip install selenium
+python3 test.py
+```
