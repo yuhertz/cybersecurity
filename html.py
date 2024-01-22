@@ -4,15 +4,24 @@ def view_website_source(url):
     try:
         # Send a GET request to the specified URL
         response = requests.get(url)
+        
+        # Raise an HTTPError for bad responses (4xx and 5xx status codes)
+        response.raise_for_status()
 
-        # Check if the request was successful (status code 200)
-        if response.status_code == 200:
-            # Print the HTML source code
-            print(response.text)
-        else:
-            print(f"Failed to retrieve the website. Status code: {response.status_code}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+        # Print the HTML source code
+        print(response.text)
+    except requests.exceptions.HTTPError as errh:
+        print(f"HTTP Error: {errh}")
+    except requests.exceptions.ConnectionError as errc:
+        print(f"Error Connecting: {errc}")
+    except requests.exceptions.Timeout as errt:
+        print(f"Timeout Error: {errt}")
+    except requests.exceptions.RequestException as err:
+        print(f"An error occurred: {err}")
+    finally:
+        # Always close the response object to release resources
+        if 'response' in locals():
+            response.close()
 
 # Prompt the user to enter the domain name
 website_url = input("Enter Website Domain Name: ")
