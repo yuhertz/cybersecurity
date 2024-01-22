@@ -15,7 +15,7 @@ def view_website_source(url):
         print(f"An error occurred: {e}")
 
 # Prompt the user to enter the domain name
-website_url = input("Enter the domain name (e.g., https://example.com): ")
+website_url = input("Enter Website Domain Name: ")
 
 # Ensure the URL starts with 'http://' or 'https://'
 if not website_url.startswith('http://') and not website_url.startswith('https://'):
