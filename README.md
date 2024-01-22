@@ -1,5 +1,12 @@
 # Ethical Hacking tools
 
+Anti DoS System Website
+```
+Copy and paste the code of anti-dos.php
+ensure you have two file named "anti-dos.php" and "blacklist.txt"
+Note that changing the name of the files can cause errors in the output
+```
+
 
 Set Up for Termux
 ```
