@@ -28,6 +28,6 @@ print(f"Average time between requests: {average_time} seconds")
 
 # Check if the average time between requests is greater than the time interval
 if average_time > time_interval:
-    print("The website may have rate limiting in place.")
+    print("The website may have rate limiting in place. Website is protected from DDoS Attack.")
 else:
-    print("The website does not appear to have rate limiting in place.")
+    print("The website does not appear to have rate limiting in place. Website is not protected from DDoS Attack.")
