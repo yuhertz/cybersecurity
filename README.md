@@ -32,12 +32,12 @@ __To view status code of website__
 python3 status.py
 ```
 
-__To check for vulnerability in the website__
+__To scan for vulnerability in the website__
 ```
 python3 scan.py
 ```
 
-__To check for weakness in the website__
+__To scan for weakness in the website__
 ```
 python3 scan2.py
 ```
