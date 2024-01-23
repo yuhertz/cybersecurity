@@ -1,49 +1,35 @@
-import requests
-import time
+import socket
 
-def check_website_security():
-    url = input("Enter Website URL or Domain Name: ")
+def scan_port(port):
+    # Create a new socket object
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     
-    # Add 'https://' if it's missing
-    if not url.startswith("https://") and not url.startswith("http://"):
-        url = "https://" + url
+    # Set a timeout value to avoid hanging on unresponsive ports
+    sock.settimeout(1)
+    
+    # Attempt to connect to the specified port
+    result = sock.connect_ex((target_ip, port))
+    
+    # Close the socket
+    sock.close()
+    
+    # Return the result (0 if the port is open, otherwise an error code)
+    return result == 0
 
-    # Check if the website is using HTTPS
-    if not url.startswith("https://"):
-        print("Warning: The website is not using HTTPS. Consider enabling SSL/TLS.")
+# Get the user input for the website URL or domain name
+url = input("Enter Website URL or Domain Name: ")
 
-    # Check for HTTP security headers
-    response = requests.head(url)
-    headers = response.headers
+# Remove "https:" from the input if it exists
+if url.startswith("https:"):
+    url = url[8:]
 
-    # Scanning animation
-    print("Scanning", end="")
-    for _ in range(5):
-        time.sleep(0.5)
-        print(".", end="", flush=True)
-    print()
+# Resolve the hostname or domain name to an IP address
+target_ip = socket.gethostbyname(url)
 
-    # Check for Content Security Policy (CSP) header
-    if "Content-Security-Policy" not in headers:
-        print("Warning: Content-Security-Policy header is missing. Consider implementing a CSP.")
+# A list of common ports to check
+common_ports = [80, 443, 8080, 8443]
 
-    # Check for X-Content-Type-Options header
-    if "X-Content-Type-Options" not in headers:
-        print("Warning: X-Content-Type-Options header is missing. Consider enabling it.")
-
-    # Check for X-Frame-Options header
-    if "X-Frame-Options" not in headers:
-        print("Warning: X-Frame-Options header is missing. Consider enabling it.")
-
-    # Check for X-XSS-Protection header
-    if "X-XSS-Protection" not in headers:
-        print("Warning: X-XSS-Protection header is missing. Consider enabling it.")
-
-    # Check for Strict Transport Security (HSTS) header
-    if "Strict-Transport-Security" not in headers:
-        print("Warning: Strict-Transport-Security header is missing. Consider enabling it.")
-
-    # You can add more security checks as per your requirements
-
-# Example usage
-check_website_security()
+# Check each port in the list
+for port in common_ports:
+    if scan_port(port):
+        print(f"Port {port} is open, there is a higher risk of DDoS attack.")
