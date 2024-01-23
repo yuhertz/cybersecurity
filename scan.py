@@ -1,38 +1,49 @@
 import requests
 import time
 
-def scan_website():
+def check_website_security():
     url = input("Enter Website URL or Domain Name: ")
-    if not url.startswith("https://"):
+    
+    # Add 'https://' if it's missing
+    if not url.startswith("https://") and not url.startswith("http://"):
         url = "https://" + url
-    print("Scanning...")
 
-    # Loading animation
-    animation = "|/-\\"
-    idx = 0
+    # Check if the website is using HTTPS
+    if not url.startswith("https://"):
+        print("Warning: The website is not using HTTPS. Consider enabling SSL/TLS.")
 
-    while True:
-        print("Scanning... " + animation[idx % len(animation)], end="\r")
-        idx += 1
-        time.sleep(0.1)
+    # Check for HTTP security headers
+    response = requests.head(url)
+    headers = response.headers
 
-        response = requests.get(url)
+    # Scanning animation
+    print("Scanning", end="")
+    for _ in range(5):
+        time.sleep(0.5)
+        print(".", end="", flush=True)
+    print()
 
-        if response.status_code == 200:
-            # Analyze the response content for potential bugs
-            # You can use regular expressions or specific patterns to identify vulnerabilities
+    # Check for Content Security Policy (CSP) header
+    if "Content-Security-Policy" not in headers:
+        print("Warning: Content-Security-Policy header is missing. Consider implementing a CSP.")
 
-            # Example: Look for SQL injection vulnerabilities
-            if 'error' in response.text:
-                print("Potential SQL injection vulnerability found!")
+    # Check for X-Content-Type-Options header
+    if "X-Content-Type-Options" not in headers:
+        print("Warning: X-Content-Type-Options header is missing. Consider enabling it.")
 
-            # Example: Check for cross-site scripting (XSS) vulnerabilities
-            if '<script>' in response.text:
-                print("Potential XSS vulnerability found!")
+    # Check for X-Frame-Options header
+    if "X-Frame-Options" not in headers:
+        print("Warning: X-Frame-Options header is missing. Consider enabling it.")
 
-            break
+    # Check for X-XSS-Protection header
+    if "X-XSS-Protection" not in headers:
+        print("Warning: X-XSS-Protection header is missing. Consider enabling it.")
 
-    print("Scan complete!")
+    # Check for Strict Transport Security (HSTS) header
+    if "Strict-Transport-Security" not in headers:
+        print("Warning: Strict-Transport-Security header is missing. Consider enabling it.")
 
-# Usage example:
-scan_website()
+    # You can add more security checks as per your requirements
+
+# Example usage
+check_website_security()
