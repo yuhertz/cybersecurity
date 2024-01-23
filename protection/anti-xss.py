@@ -1,4 +1,6 @@
 import bleach
+# type into terminal or shell "pip install bleach"
+
 
 def sanitize_input(user_input):
     # Allow only certain tags and attributes for safety
