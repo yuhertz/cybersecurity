@@ -24,12 +24,12 @@ cd cybersecurity
 pip3 install -r requirements.txt
 ```
 
-__To view source code__
+__To view source code of the website__
 ```
 python3 html.py
 ```
 
-__To view status code of website__
+__To view status code of the website__
 ```
 python3 status.py
 ```
