@@ -1,6 +1,8 @@
 # Ethical Hacking tools
 [NOTE] This is legal and used to test the vulnerabilies of a website, illegal attacks such DDoS attacks are not shown
 
+Made by Hertz
+
 
 __Set Up for Termux__
 ```
