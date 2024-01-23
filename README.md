@@ -2,7 +2,7 @@
 [NOTE] This is legal and used to test the vulnerabilies of a website, illegal attacks such DDoS attacks are not shown
 
 
-Set Up for Termux
+__Set Up for Termux__
 ```
 pkg install git
 pkg install python-pip
@@ -12,7 +12,7 @@ cd cybersecurity
 pip install -r requirements.txt
 ```
 
-Set Up for Kali Linux
+__Set Up for Kali Linux__
 ```
 sudo apt install git
 sudo apt install pip
@@ -22,24 +22,24 @@ cd cybersecurity
 pip3 install -r requirements.txt
 ```
 
-To view source code
+__To view source code__
 ```
 python3 html.py
 ```
 
-To view status code of website
+__To view status code of website__
 ```
 python3 status.py
 ```
 
-To check for vulnerability in the website
+__To check for vulnerability in the website__
 ```
 python3 scan.py
 ```
 
 
 
-__Other Tools:__
+___Other Tools:___
 
 Anti DoS System Website:
 (https://github.com/yuhertz/anti-dos-website)
