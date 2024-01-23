@@ -20,7 +20,7 @@ def scan_port(port):
 url = input("Enter Website URL or Domain Name: ")
 
 # Remove "https:" from the input if it exists
-if url.startswith("https:"):
+if url.startswith("https://"):
     url = url[8:]
 
 # Resolve the hostname or domain name to an IP address
