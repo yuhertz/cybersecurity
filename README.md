@@ -39,24 +39,14 @@ __To scan and identify all potential vulnerability in the website__
 python3 scan.py
 ```
 
-__To scan and identify potential XSS attack in the website__
+__To scan and identify potential XSS attack and SQL Injection in the website__
 ```
 python3 scan2.py
 ```
 
-__To scan and identify potential SQL Injection attack in the website__
-```
-python3 scan3.py
-```
-
-__To scan and identify potential RFI attack in the website__
-```
-python3 scan4.py
-```
-
 __To scan and identify potential DDoS attack in the website__
 ```
-python3 scan5.py
+python3 scan3.py
 ```
 
 
