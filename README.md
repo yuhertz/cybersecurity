@@ -37,6 +37,11 @@ __To check for vulnerability in the website__
 python3 scan.py
 ```
 
+__To check for weakness in the website__
+```
+python3 scan2.py
+```
+
 
 
 ___Other Tools:___
