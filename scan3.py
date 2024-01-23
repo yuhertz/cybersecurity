@@ -60,7 +60,7 @@ def scan_website():
     # Check each port in the list
     for port in common_ports:
         if scan_port(port):
-            print(f"Port {port} is open, there is a higher risk of DDoS attack.")
+            print(f"Port {port} is open, there is a higher risk of DDoS attack!")
 
     print("Scan complete!")
 
