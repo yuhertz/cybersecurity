@@ -44,15 +44,11 @@ __To scan and identify potential XSS attack and SQL Injection in the website__
 python3 scan2.py
 ```
 
-__To scan and identify common port in the website__
+__To scan and identify risk of DDoS attack in the website__
 ```
 python3 scan3.py
 ```
 
-__To scan and identify potential DDoS attack in the website__
-```
-python3 scan4.py
-```
 
 
 
