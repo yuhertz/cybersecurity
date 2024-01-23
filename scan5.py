@@ -33,34 +33,33 @@ def scan_website():
 
             break
 
-  def scan_port(port):
-    # Create a new socket object
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # Extract the domain name from the URL
+    domain_name = url.split("/")[2]
 
-    # Set a timeout value to avoid hanging on unresponsive ports
-    sock.settimeout(1)
+    def scan_port(port):
+        # Create a new socket object
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # Attempt to connect to the specified port
-    result = sock.connect_ex((target_ip, port))
+        # Set a timeout value to avoid hanging on unresponsive ports
+        sock.settimeout(1)
 
-    # Close the socket
-    sock.close()
+        # Attempt to connect to the specified port
+        result = sock.connect_ex((domain_name, port))
 
-    # Return the result (0 if the port is open, otherwise an error code)
-    return result == 0
+        # Close the socket
+        sock.close()
 
-    target_ip = socket.gethostbyname(url)
+        # Return the result (0 if the port is open, otherwise an error code)
+        return result == 0
 
-# A list of common ports to check
-common_ports = [80, 443, 8080, 8443]
+    target_ip = socket.gethostbyname(domain_name)
 
-# Check each port in the list
-for port in common_ports:
-    if scan_port(port):
-        print(f"Port {port} is open, there is a higher risk of DDoS attack.")
+    # A list of common ports to check
+    common_ports = [80, 443, 8080, 8443]
 
+    # Check each port in the list
+    for port in common_ports:
+        if scan_port(port):
+            print(f"Port {port} is open, there is a higher risk of DDoS attack.")
 
     print("Scan complete!")
-
-# Usage example:
-scan_website()
