@@ -1,5 +1,5 @@
 import bleach
-# type into terminal or shell "pip install bleach"
+# type  "pip install bleach" into terminal or shell
 
 
 def sanitize_input(user_input):
