@@ -1,5 +1,5 @@
 # Ethical Hacking tools
-[NOTE] This is legal and used to test the vulnerabilies of a website, illegal attacks such DDoS attacks are not shown
+[NOTE] It is legal and used to test a website's vulnerabilities, illegal attacks such as DDoS attacks are not shown.
 
 Made by Hertz
 
