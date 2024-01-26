@@ -1,41 +1,22 @@
 import requests
-import time
 import socket
 
 def scan_website():
+    # Prompt the user to enter a website URL or domain name
     url = input("Enter Website URL or Domain Name: ")
+    
+    # Check if the URL does not start with "https://"
     if not url.startswith("https://"):
+        # If not, prepend "https://" to the URL
         url = "https://" + url
+    
+    # Print a message indicating the scanning process has begun
     print("Scanning...")
-
-    # Loading animation
-    animation = "|/-\\"
-    idx = 0
-
-    while True:
-        print("Scanning... " + animation[idx % len(animation)], end="\r")
-        idx += 1
-        time.sleep(0.1)
-
-        response = requests.get(url)
-
-        if response.status_code == 200:
-            # Analyze the response content for potential bugs
-            # You can use regular expressions or specific patterns to identify vulnerabilities
-
-            # Example: Look for SQL injection vulnerabilities
-            if 'error' in response.text:
-                print("Potential SQL injection vulnerability found!")
-
-            # Example: Check for cross-site scripting (XSS) vulnerabilities
-            if '<script>' in response.text:
-                print("Potential XSS vulnerability found!")
-
-            break
 
     # Extract the domain name from the URL
     domain_name = url.split("/")[2]
 
+    # Define a function to scan a specific port
     def scan_port(port):
         # Create a new socket object
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -52,6 +33,7 @@ def scan_website():
         # Return the result (0 if the port is open, otherwise an error code)
         return result == 0
 
+    # Obtain the target IP address from the domain name
     target_ip = socket.gethostbyname(domain_name)
 
     # A list of common ports to check
@@ -59,10 +41,33 @@ def scan_website():
 
     # Check each port in the list
     for port in common_ports:
+        # Call the scan_port function to check if the port is open
         if scan_port(port):
             print(f"Port {port} is open, there is a higher risk of DDoS attack!")
 
-    print("Scan complete!")
+    try:
+        # Check for rate limits by sending an HTTP GET request to the website
+        response = requests.get(url)
+        rate_limit_status = False
+        
+        # Check if the response status code indicates a rate limit
+        if response.status_code >= 429:
+            print(f"Website {url} has a rate limit! Current status code: {response.status_code}")
+            rate_limit_status = True
+        # Check if rate limit headers are present in the response
+        elif response.headers.get("X-RateLimit-Limit"):
+            print(f"Website {url} has a rate limit of {response.headers['X-RateLimit-Limit']} requests per {response.headers['X-RateLimit-Interval']} seconds")
+            rate_limit_status = True
+        # If no rate limit information is found in the response headers
+        else:
+            print("Website does not have a rate limit, higher risk of DDoS attack")
+    # Handle any potential exceptions that occur during the request
+    except requests.RequestException as e:
+        print(f"An error occurred while attempting to fetch {url}: {e}")
+        rate_limit_status = False
 
-# Usage example:
+    # Print a message indicating that the scan has finished
+    print("Scan finished.")
+
+# Call the scan_website function to start the scanning process
 scan_website()
