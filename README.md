@@ -26,7 +26,7 @@ pip3 install -r requirements.txt
 
 __To view source code of the website__
 ```
-python3 html.py
+python3 source.py
 ```
 
 __To view status code of the website__
